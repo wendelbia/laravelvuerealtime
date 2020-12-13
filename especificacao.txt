@@ -1,0 +1,59 @@
+vamos baixar o node:
+npm install
+
+npm run watch: pega todos os assets vai compilar o q tive dentro de resources e fica escutando para parar o processo -> control + c
+
+agora instalamos o vuex
+npm i vuex --save
+
+para preload: greyby/vue-spinner:
+https://github.com/greyby/vue-spinner
+npm install vue-spinner
+
+<pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+<grid-loader :loading="loading" :color="color" :size="size"></grid-loader>
+<clip-loader :loading="loading" :color="color" :size="size"></clip-loader>
+<rise-loader :loading="loading" :color="color" :size="size"></rise-loader>
+<beat-loader :loading="loading" :color="color" :size="size"></beat-loader>
+<sync-loader :loading="loading" :color="color" :size="size"></sync-loader>
+<rotate-loader :loading="loading" :color="color" :size="size"></rotate-loader>
+<fade-loader :loading="loading" :color="color" :height="height" :width="width"></fade-loader>
+<pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader>
+<square-loader :loading="loading" :color="color" :size="size"></square-loader>
+<scale-loader :loading="loading" :color="color" :height="height" :width="width"></scale-loader>
+<skew-loader :loading="loading" :color="color" :size="size"></skew-loader>
+<moon-loader :loading="loading" :color="color" :size="size"></moon-loader>
+<ring-loader :loading="loading" :color="color" :size="size"></ring-loader>
+<bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>          
+<dot-loader :loading="loading" :color="color" :size="size"></dot-loader>
+
+
+/////////////////////////////qqqq
+o upload de imagem por padrão vai ficar dentro de public faço essa modificação em config/filesystems.php e mudo de local para public pois o laravel faz um link simbolico dentro de storage, crio esse link em linha de comando
+verifico se existe com 
+ls -l public/
+rodo php artisan storage:link
+dentro de public crio uma passta chamda storage
+
+
+///////////////////////////////////////////q
+agora a principal etapa q é configurar para trabalhr como realtime
+vou em config/broadcasting.php
+vou antes em config/app e descomento a linda do App\Providers\BroadcastService e vou no .env e mudo o vl das variáveis do braoadcasting
+BROADCAST_DRIVER=pusher e modifico o pusher, onde vamos pegar essar informações do pusher?
+vou no site do pusher e faço uma conta q testo minhas app em realtime crio um app e vou em chave de aplicativo e copio no .env esse dados:
+app_id = "1094892"
+key = "7495e6541a5c218daa89"
+secret = "db049e00b9e667251a89"
+cluster = "us2"
+Instalo o pusher via composer:
+composer require pusher/pusher-php-server
+
+npm install pusher-js laravel-echo --save
+
+vou no boostrap.js e descomento o bloco Echo do pusher
+
+vou em route/channels e coloco lá o que eu quero retornar
+
+agora para as mensagens aparecerem realtime uso:
+php artisan make:event Chat\MessageCreated
